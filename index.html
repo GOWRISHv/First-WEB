@@ -1,0 +1,26 @@
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<script> 
+var firebaseConfig = {
+  apiKey: "AIzaSyCdC0S6-zUVlzTTfXXnrHj9nt3jvBqc7gk",
+  authDomain: "test-e1e17.firebaseapp.com",
+  projectId: "test-e1e17",
+  storageBucket: "test-e1e17.firebasestorage.app",
+  messagingSenderId: "1087817633299",
+  appId: "1:1087817633299:web:fcb0fca273339ab4f479e6"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth =firebase.auth();
+const db=firebase.firestore();
+
+function reg(email, password,role="user"){
+  auth.createUserWithEmailAndPassword(email,password)
+  .then(cred=>{return db.collection("user").doc(cred.user.uid).set({email:email,role:role});})
+  .then(()=> alert("user registered"))
+  .then(err=>alert(err.messsage));
+  }
+</script>
